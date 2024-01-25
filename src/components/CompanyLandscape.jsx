@@ -77,7 +77,8 @@ const CompanyLandscape = () => {
       </div>
       <div className='max-md:hidden md:sticky bottom-0 -z-10'>
         <StaticImage
-          src='../images/map_temp.jpg'
+          src='../images/MapChart_Map.jpeg'
+          className='w-screen'
         />
       </div>
 
