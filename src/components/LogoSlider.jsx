@@ -1,59 +1,41 @@
-import React from "react";
+import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
-import { GatsbyImage, getImage } from 'gatsby-plugin-image';
-// import Slider from "react-slick";
-const LogoSlider = () => {
-  // Width must be 250px, height must be 100px. Bg color must be applied to the image before hand.
+
+const MyPage = () => {
   const data = useStaticQuery(graphql`
-      query CompanyLogos {
-        allFile(filter: {relativeDirectory: {eq: "company-logos"}}) {
-          nodes {
-            id
-            childImageSharp {
-              gatsbyImageData( placeholder: BLURRED)
+    query {
+      allFile(
+        filter: { sourceInstanceName: { eq: "images" }, relativeDirectory: { eq: "company-logos" } }
+      ) {
+        nodes {
+          id
+          name
+          publicURL
+          childImageSharp {
+            fluid(maxWidth: 400) {
+              ...GatsbyImageSharpFluid
             }
           }
         }
+      }
     }
   `)
-  const logos=data.allFile.nodes;
-  console.log(logos[0]);
-  const slides = logos.slice(0,logos.length/2).map((logo, id) => (
-    <GatsbyImage
-      image={getImage(logo)}
-      alt="logo"
 
-      key={id}
-      className="p-16 m-16 "
-    />
-  ));
-  const len = `${logos.length/2 * 250}px`;
+  const images = data.allFile.nodes
+
   return (
-    <div className="my-10">
-      <div className="container mx-auto my-10 space-y-2 text-center">
-        <h2 className="text-4xl md:text-5xl font-bold  tracking-wide">
-          Our Onboarded <span className="text-primary">Startups</span>
-        </h2>
+    <div className="flex flex-col items-center" >
+      <h1 >Our Clients</h1>
+      <div className="flex lg:flex-row justify-center p-20 space-x-10 flex-col flex-wrap min-w-lg:space-y-10">
+        {images.map((image) => (
+          <div key={image.id} className="max-w-lg:flex justify-center">
+            {/* If you're using the publicURL for direct image URLs */}
+            <img src={image.publicURL} alt={image.name} className="w-40  lg:w-44" />
+          </div>
+        ))}
       </div>
-      {/* <div className="slider flex items-center justify-center overflow-hidden h-[280px] w-screen ">
-        <div className={`slide-track relative flex `}>
-          <div
-            className={`slide flex items-center w-[${len}] drag-none animate-scroll-slow `}
-          >
-            {slides}
-          </div>
-          <div
-            className={`slide flex items-center w-[${len}] drag-none animate-scroll-slow `}
-          >
-            {slides}
-          </div>
-        </div>
-      </div> */}
-
     </div>
-  );
-};
+  )
+}
 
-export default LogoSlider;
-
-
+export default MyPage

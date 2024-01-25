@@ -1,12 +1,12 @@
 import Layout from '../components/Layout'
 import React from 'react'
-import TestimonialsPage from '../components/TestimonialsPage'
 import Seo from '../components/Seo'
+import Reviews from '../components/Reviews'
 
 const testimonialspage = ({location}) => {
   return (
     <Layout location={location}>
-        <TestimonialsPage />
+        <Reviews />
     </Layout>
   )
 }
