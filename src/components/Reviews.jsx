@@ -20,6 +20,9 @@ class Reviews extends React.Component {
   render() {
     return (
       <div className="container mx-auto mt-20 w-full swiper mySwiper">
+        <h1 className="text-4xl text-center text-gray-800 font-bold mb-4 py-4">
+          Testimonials
+        </h1>
         <div className="mb-16 swiper-wrapper">
         <div className="swiper-slide w-1/2 md:w-1/4">
             <div className="p-4 text-gray-800 md:border-l-4 border-gray-600 rounded-l-none rounded-lg shadow-md">
